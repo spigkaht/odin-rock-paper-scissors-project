@@ -80,6 +80,14 @@ function getComputerChoice() {
 
 function getPlayerChoice() {
   let guess = prompt("Rock, Paper, Scissors?");
+  if (guess.toLowerCase() === "paper") {
+    return 1;
+  } else if (guess.toLowerCase() === "scissors") {
+    return 2;
+  } else if (guess.toLowerCase() === "rock") {
+    return 3;
+  } else console.log("Incorrect Entry");
+  return 0;
 }
 
 function winOrLose(player, computer) {
@@ -148,13 +156,16 @@ function playGame() {
     console.log("player score: ", playerScore);
     console.log("computer score: ", computerScore);
     console.log("--------------------");
-
   }
 
   gameWinner(playerScore, computerScore);
 }
 
-playGame();
+let button = document.querySelector("#playButton");
+button.addEventListener("click", () => {
+  playGame();
+  console.log("Please refresh the page!");
+});
 
 // >> invoke playRound function ( playerScore, computerScore, score )
 // >>> invoke winOrLose function ( ) > return
