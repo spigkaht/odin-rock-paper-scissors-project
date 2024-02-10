@@ -1,0 +1,9 @@
+body {
+  text-align: center;
+}
+
+button {
+  background-color: blue;
+  font-size: 80px;
+  color: white;
+}
