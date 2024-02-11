@@ -1,9 +1,25 @@
 body {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 400px;
+  background-color: aquamarine;
 }
 
 button {
   background-color: blue;
-  font-size: 80px;
+  font-size: 40px;
   color: white;
+  flex-shrink: 1;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+#buttons {
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
 }

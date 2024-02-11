@@ -1,75 +1,3 @@
-// let roundResult = "";
-
-// function getComputerChoice() {
-//   return Math.floor(Math.random() * 3 + 1);
-// }
-
-// function getPlayerChoice() {
-//   return Math.floor(Math.random() * 3 + 1 );
-// }
-
-// function toString(num) {
-//   switch (num) {
-//     case 1:
-//       return "Rock";
-//       break;
-//     case 2:
-//       return "Paper";
-//       break;
-//     case 3:
-//       return "Scissors";
-//       break;
-//     default:
-//       console.log("unknown error")
-//   }
-// }
-
-// function playRound(computer, player) {
-//   if (computer === player) {
-//     return "Draw!";
-//   } else if (
-//     (computer === "Rock" && player === "Paper") ||
-//     (computer === "Paper" && player === "Scissors") ||
-//     (computer === "Scissors" && player === "Rock")
-//     ) {
-//     return "You Win!";
-//   } else if (
-//     (computer === "Paper" && player === "Rock") ||
-//     (computer === "Scissors" && player === "Paper") ||
-//     (computer === "Rock" && player === "Scissors")
-//     ) {
-//       return "You lose!";
-//     } else return "uh oh";
-// }
-
-// function playGame() {
-//   let playerTotal;
-//   let computerTotal;
-//   for (let i = 0; i <= 5; i++) {
-//     roundResult = playRound(computerChoice, playerChoice);
-//     if (roundResult === "You win!") {
-//       playerTotal++;
-//     } else if (roundResult === "You lose!") {
-//       computerTotal++;
-//     } else if (roundResult === "Draw!") {
-//       break;
-//     }
-//   }
-
-//   if (playerTotal > computerTotal) {
-//     return "You win! Player score: " + playerTotal + " Computer score: " + computerTotal;
-//   }
-// }
-
-// let computerChoice = toString(getComputerChoice());
-// let playerChoice = toString(getPlayerChoice());
-// let endResult = playGame(computerChoice, playerChoice);
-
-// console.log("computer: ", computerChoice);
-// console.log("player: ", playerChoice);
-// console.log("result: ", roundResult);
-// console.log("end result: ", endResult);
-
 let playerScore = 0;
 let computerScore = 0;
 let score = 0;
@@ -78,17 +6,17 @@ function getComputerChoice() {
   return Math.floor(Math.random() * 3 + 1);
 }
 
-function getPlayerChoice() {
-  let guess = prompt("Rock, Paper, Scissors?");
-  if (guess.toLowerCase() === "paper") {
-    return 1;
-  } else if (guess.toLowerCase() === "scissors") {
-    return 2;
-  } else if (guess.toLowerCase() === "rock") {
-    return 3;
-  } else console.log("Incorrect Entry");
-  return 0;
-}
+// function getPlayerChoice() {
+//   let guess = prompt("Rock, Paper, Scissors?");
+//   if (guess.toLowerCase() === "paper") {
+//     return 1;
+//   } else if (guess.toLowerCase() === "scissors") {
+//     return 2;
+//   } else if (guess.toLowerCase() === "rock") {
+//     return 3;
+//   } else console.log("Incorrect Entry");
+//   return 0;
+// }
 
 function winOrLose(player, computer) {
   if (player === computer) {
@@ -138,11 +66,16 @@ function gameWinner(player, computer) {
   return;
 }
 
-function playGame() {
+function clearScreen() {
+  const clearDiv = document.querySelector(".output");
+  clearDiv.innerHTML = "";
+}
+
+function playGame(player) {
   while (
     (playerScore !== 3 && computerScore !== 3)
   ) {
-    let playerChoice = getPlayerChoice();
+    let playerChoice = player;
     let computerChoice = getComputerChoice();
 
     let roundResult = playRound(playerChoice, computerChoice);
@@ -152,30 +85,41 @@ function playGame() {
     } else if (roundResult === -1) {
       playerScore++;
     }
+  
+    const playerChoiceOutput = document.createElement("p");
+    playerChoiceOutput.textContent = `Player's choice: ${outputString(player)}`;
+    const computerChoiceOutput = document.createElement("p");
+    computerChoiceOutput.textContent = `Computer's choice: ${outputString(computerChoice)}`;
+    const screenOutput = document.querySelector(".output");
+    screenOutput.appendChild(playerChoiceOutput);
+    screenOutput.appendChild(computerChoiceOutput);
+    const playerScoreOutput = document.createElement("p");
+    playerScoreOutput.textContent = `Player's Score: ${playerScore}`;
+    screenOutput.appendChild(playerScoreOutput);
+    const computerScoreOutput = document.createElement("p");
+    computerScoreOutput.textContent = `Computer's Score: ${computerScore}`;
+    screenOutput.appendChild(computerScoreOutput);
 
-    console.log("player score: ", playerScore);
-    console.log("computer score: ", computerScore);
-    console.log("--------------------");
+    return;
   }
 
   gameWinner(playerScore, computerScore);
 }
 
-let button = document.querySelector("#playButton");
-button.addEventListener("click", () => {
-  playGame();
-  console.log("Please refresh the page!");
+let rockButton = document.querySelector("#rock");
+rockButton.addEventListener("click", () => {
+  clearScreen();
+  playGame(3);
 });
 
-// >> invoke playRound function ( playerScore, computerScore, score )
-// >>> invoke winOrLose function ( ) > return
-// >> check scores / invoke checkScores function ( )
-// >>> if player won -> score++
-// >>> if computer won -> score--
-// >>> if draw -> i--
-// >>> if score = 3 or -3 -> winner = player or computer
-// >> if score is + -> player won
-// >> if score is - -> computer won
-// >> invoke toString function ( ) > return
-// >> output winOrLose as string
-// >> return
+let paperButton = document.querySelector("#paper");
+paperButton.addEventListener("click", () => {
+  clearScreen();
+  playGame(1);
+});
+
+let scissorsButton = document.querySelector("#scissors");
+scissorsButton.addEventListener("click", () => {
+  clearScreen();
+  playGame(2);
+});
