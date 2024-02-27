@@ -2,6 +2,11 @@ let playerScore = 0;
 let computerScore = 0;
 let score = 0;
 
+const tempQuery = document.querySelector("#buttons");
+const tempEl = document.createElement("div");
+tempQuery.appendChild(tempEl);
+console.log("container query: ", tempQuery);
+
 function getComputerChoice() {
   return Math.floor(Math.random() * 3 + 1);
 }
